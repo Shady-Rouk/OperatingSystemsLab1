@@ -29,8 +29,9 @@ list_t *list_alloc() {
 
 void list_free(list_t *l) {
 	node_t* curr_ptr = l->head;
+	node_t* temp;
 	while(curr_ptr != NULL) {
-		node_t* temp = curr_ptr;
+		temp = curr_ptr;
 		curr_ptr = curr_ptr->next;
 		node_free(temp);
 	}
