@@ -42,11 +42,9 @@ void list_free(list_t *l) {
 
 void list_print(list_t *l) {
 	if (l == NULL) {
-		printf("The list is empty.\n");
 		return;
 	}
 	if (l->head == NULL) {
-		printf("The list is empty.\n");
 		return;
 	}
 	node_t* curr_ptr = l->head;
@@ -95,10 +93,10 @@ void list_add_to_front(list_t *l, elem value) {
 }
 
 void list_add_at_index(list_t *l, elem value, int index) {
-	if (index < 0) {
+	if (index < 0 || index > list_length(l)) {
 		return;
 	}
-	if (index >= list_length(l)) {
+	if (index == list_length(l)) {
 		list_add_to_back(l, value);
 		return;
 	}
@@ -184,6 +182,9 @@ elem list_remove_at_index(list_t *l, int index) {
 }
 
 bool list_is_in(list_t *l, elem value) {
+	if (l == NULL || l->head == NULL) {
+		return false;
+	}
 	node_t* curr_ptr = l->head;
 	while (curr_ptr != NULL) {
 		if (curr_ptr->value == value) {
@@ -196,7 +197,7 @@ bool list_is_in(list_t *l, elem value) {
 
 elem list_get_elem_at(list_t *l, int index) {
 	if (l->head == NULL) {
-		return;
+		return -1;
 	}
 	if (index < 0 || index >= list_length(l)) {
 		return -1;
